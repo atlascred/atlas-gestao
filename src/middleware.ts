@@ -18,4 +18,4 @@ export async function middleware(request:NextRequest){
  if(request.nextUrl.pathname.startsWith('/api/'))response.headers.set('Cache-Control','private, no-store');
  return response;
 }
-export const config={matcher:['/((?!_next/static|_next/image|favicon.ico|logoatlas.png).*)']};
+export const config={matcher:['/((?!_next/static|_next/image|favicon.ico|logoatlas.png|logonovo.png).*)']};
