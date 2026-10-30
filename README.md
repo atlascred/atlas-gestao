@@ -7,13 +7,13 @@ Aplicação em português do Brasil com Next.js, TypeScript, Supabase Auth/Postg
 ## Funcionalidades
 
 - Aprovação de empresas pelo administrador global; suspensão e reativação auditadas. O acesso operacional depende de empresa aprovada e vínculo ativo.
-- Login, convite, recuperação e troca de senha, perfil, seleção de empresa, equipe e permissões por funcionário. Cobradores consultam somente clientes atribuídos.
+- Login manual, criação administrativa de contas sem e-mail, troca de senha, perfil, seleção de empresa, equipe e permissões por funcionário. Cobradores consultam somente clientes atribuídos.
 - Clientes com CPF validado, ficha completa, histórico financeiro, contato pelo WhatsApp e documentos privados JPG/PNG/PDF de até 4 MiB.
 - Empréstimos diários, semanais e mensais; juros simples; HALF_UP; divisão exata dos centavos; calendário com opção de excluir domingos; prévia calculada no servidor. Termos financeiros imutáveis.
 - Recebimentos parciais, renovação mensal, regularização de vencidas, quitação negociada, multas e estornos. Operações financeiras usam transações, idempotência, trilha de auditoria e movimentos de caixa.
 - Despesas, ajustes de caixa, estornos de despesas/ajustes e fechamento por data. Dashboard com dados persistentes e sem números fictícios.
 - Relatórios de clientes, contratos, parcelas, atrasos, recebimentos, despesas, caixa e fechamentos em CSV, XLSX e PDF. Até 10.000 registros por planilha e 1.000 por PDF; reduza o período para volumes maiores.
-- Administração global pesquisável/paginada, recuperação de senha por e-mail, alteração de acesso e auditoria. Configurações de nome, logotipo, favicon, mensagem de cobrança e textos de privacidade/termos por empresa.
+- Administração global pesquisável/paginada, definição manual de senhas, alteração de acesso e auditoria. Configurações de nome, logotipo, favicon, mensagem de cobrança e textos de privacidade/termos por empresa.
 
 ## Executar localmente
 
@@ -53,10 +53,10 @@ Em um projeto já existente, confira primeiro o histórico remoto. Não aplique 
 No painel Supabase:
 
 1. **Authentication → URL Configuration**: configure Site URL e permita as URLs da aplicação para `/login`, `/auth/callback` e `/auth/callback?next=%2Ftrocar-senha`. Inclua também localhost se usar desenvolvimento.
-2. **Authentication**: desative a opção de permitir novos cadastros públicos, mantendo o provedor Email habilitado para login e convites. Na CLI, use `auth.enable_signup = false` e `auth.email.enable_signup = true`. O cadastro público do ATLAS registra uma solicitação, sem conceder acesso operacional.
-3. Configure SMTP para entrega real de convites e recuperação. O serviço de e-mail padrão do provedor tem restrições e cotas; um retorno de API não comprova recebimento na caixa de entrada.
+2. **Authentication**: desative novos cadastros públicos e confirmação por e-mail, mantendo o provedor Email habilitado para login por senha. Na CLI: `auth.enable_signup = false`, `auth.email.enable_signup = true` e `auth.email.enable_confirmations = false`. O cadastro público do ATLAS registra uma solicitação, sem conceder acesso operacional.
+3. As contas são criadas pelo administrador com senha inicial definida manualmente e já confirmadas no Auth. Nenhum e-mail de convite, confirmação ou recuperação é enviado. A redefinição é feita pelo usuário autenticado ou por um administrador no sistema.
 4. Crie e confirme a primeira conta administrativa usando procedimento seguro no Supabase. Configure `MASTER_BOOTSTRAP_SECRET`, faça login e abra `/iniciar-master`. O bootstrap transacional só permite o primeiro master. Remova esse segredo depois.
-5. O master aprova solicitações; o administrador convidado define a própria senha e acessa sua empresa. Ser master não cria automaticamente vínculo operacional com todas as empresas.
+5. Após aprovação, o responsável entra com o e-mail informado e a senha definida manualmente pelo master. Ser master não cria automaticamente vínculo operacional com todas as empresas.
 
 ## Regras financeiras e operação
 
@@ -82,7 +82,7 @@ psql "$DIRECT_URL" -X -v ON_ERROR_STOP=1 -f supabase/tests/lifecycle.sql
 psql "$DIRECT_URL" -X -v ON_ERROR_STOP=1 -f supabase/tests/access_and_reversal.sql
 ```
 
-Cobrem isolamento de tenant, restrição do cobrador, autorização master, último administrador, caixa, idempotência, parcelas, multas, quitação, renovação e estorno. A CI executa lint, testes e build sem segredos reais. Uma compilação bem-sucedida não substitui teste visual e entrega de e-mails no ambiente publicado.
+Cobrem isolamento de tenant, restrição do cobrador, autorização master, último administrador, caixa, idempotência, parcelas, multas, quitação, renovação e estorno. A CI executa lint, testes e build sem segredos reais. A compilação deve ser complementada por revisão visual em dispositivos móveis antes de expandir a operação.
 
 ## GitHub e Vercel
 
@@ -103,7 +103,7 @@ Veja [operação e limites](docs/OPERACAO.md) e [backup/restore](docs/BACKUP.md)
 
 - **Sessão inválida**: entre novamente; confira URL/chave pública e os cookies. Reinicie o servidor após modificar `.env.local`.
 - **Acesso negado**: confira empresa selecionada, aprovação, vínculo ativo e permissões. Não desative RLS para contornar erros.
-- **Convite/recuperação não chega**: revise SMTP, redirecionamentos, spam e limites de e-mail do Supabase.
+- **Acesso de novo usuário**: confirme manualmente o cadastro no Auth, o vínculo ativo e a empresa aprovada; entregue a senha inicial em canal privado.
 - **Arquivo indisponível**: links expiram; use “Atualizar links de acesso” na ficha do cliente.
 - **Falha ao gerar relatório**: reduza o período e confira permissões de leitura dos módulos e exportação.
 - **Correção financeira**: use estorno; não edite ou apague lançamentos diretamente no banco.

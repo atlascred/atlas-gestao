@@ -34,7 +34,7 @@ O operador define seus textos de privacidade e termos nas configurações, base 
 
 ## Homologação externa
 
-Antes de usar com clientes reais, valide convites/recuperação recebidos no e-mail, redirecionamentos de produção, telas em celular/desktop, impressão e permissões com usuários reais de homologação. O navegador remoto não estava disponível na sessão de implementação; testes HTTP não comprovam aparência ou usabilidade visual. SMTP e Auth URL Configuration precisam ser conferidos no painel do Supabase.
+Antes de usar com clientes reais, valide telas em celular/desktop, impressão e permissões com usuários de homologação. O acesso é configurado manualmente, sem confirmação ou recuperação por e-mail. O navegador remoto não estava disponível na sessão de implementação; a compilação e os testes HTTP não comprovam aparência visual em todos os dispositivos.
 
 ## Cadastro completo do cliente
 
@@ -43,3 +43,7 @@ O cadastro e a ficha usam os grupos Dados do cliente, Contato familiar, Informa�
 Ao completar os oito dígitos de qualquer um dos CEPs, o sistema consulta o [ViaCEP](https://viacep.com.br/) e preenche o endereço correspondente. Complete número e complemento. CEP não encontrado ou indisponibilidade do serviço exibem mensagem e permitem preenchimento manual. Só o CEP é enviado ao serviço externo.
 
 Os documentos são Foto do RG, Selfie com documento, Comprovante de residência, Comprovante do comércio, Foto da frente da casa (opcional), Foto da frente do comércio (opcional) e Comprovante PIX enviado ao cliente. Documentos antigos continuam acessíveis. No cadastro, selecione os arquivos antes de salvar; se algum envio falhar, os dados ficam salvos e os anexos pendentes podem ser reenviados sem criar outro cliente. Na ficha, cada anexo pode ser visualizado dentro do sistema, aberto em outra aba ou removido com confirmação.
+
+## Contas e senhas sem e-mail
+
+O administrador cria as contas pelo menu Administração, informa o e-mail de login e define a senha inicial. A conta Auth é marcada como confirmada pelo servidor; não há envio de convite. Na fila global, o master define a senha inicial ao aprovar a empresa. Para trocar a senha, o master define uma nova senha no diretório global ou o próprio usuário altera a senha em “Meu perfil e senha”. A recuperação por e-mail está desativada. O responsável deve entregar senhas temporárias ao usuário por canal privado e orientar uma troca imediata. A opção de cadastros públicos permanece desativada; o e-mail continua sendo somente identificador de login.
