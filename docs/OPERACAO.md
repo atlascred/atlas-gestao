@@ -35,3 +35,11 @@ O operador define seus textos de privacidade e termos nas configurações, base 
 ## Homologação externa
 
 Antes de usar com clientes reais, valide convites/recuperação recebidos no e-mail, redirecionamentos de produção, telas em celular/desktop, impressão e permissões com usuários reais de homologação. O navegador remoto não estava disponível na sessão de implementação; testes HTTP não comprovam aparência ou usabilidade visual. SMTP e Auth URL Configuration precisam ser conferidos no painel do Supabase.
+
+## Cadastro completo do cliente
+
+O cadastro e a ficha usam os grupos Dados do cliente, Contato familiar, Informações auxiliares e Documentos e anexos. CPF, CEPs e WhatsApps têm máscaras; o servidor normaliza os números e valida CPF, e-mail e comprimento de CEP/telefone. E-mails são salvos sem espaços nas pontas e em minúsculas.
+
+Ao completar os oito dígitos de qualquer um dos CEPs, o sistema consulta o [ViaCEP](https://viacep.com.br/) e preenche o endereço correspondente. Complete número e complemento. CEP não encontrado ou indisponibilidade do serviço exibem mensagem e permitem preenchimento manual. Só o CEP é enviado ao serviço externo.
+
+Os documentos são Foto do RG, Selfie com documento, Comprovante de residência, Comprovante do comércio, Foto da frente da casa (opcional), Foto da frente do comércio (opcional) e Comprovante PIX enviado ao cliente. Documentos antigos continuam acessíveis. No cadastro, selecione os arquivos antes de salvar; se algum envio falhar, os dados ficam salvos e os anexos pendentes podem ser reenviados sem criar outro cliente. Na ficha, cada anexo pode ser visualizado dentro do sistema, aberto em outra aba ou removido com confirmação.
