@@ -34,7 +34,8 @@ Abra http://127.0.0.1:3000/login. Configure as variáveis antes de usar os módu
 | `SUPABASE_SERVICE_ROLE_KEY` | Chave secret/service role, somente no servidor |
 | `NEXT_PUBLIC_SITE_URL` | URL canônica da aplicação, sem barra final |
 | `MASTER_BOOTSTRAP_SECRET` | Segredo temporário para criar o primeiro master |
-| `ATLAS_LOGIN_ALIAS`, `ATLAS_LOGIN_EMAIL` | Alias opcional de login associado a um e-mail real |
+| `ATLAS_LOGIN_ALIAS`, `ATLAS_LOGIN_EMAIL` | Primeiro alias opcional de login associado a um e-mail real |
+| `ATLAS_TENANT_LOGIN_ALIAS`, `ATLAS_TENANT_LOGIN_EMAIL` | Segundo alias opcional de login associado a um e-mail real |
 
 As chaves modernas `sb_publishable_…` e `sb_secret_…` são aceitas. Nunca prefixe o segredo administrativo com `NEXT_PUBLIC_`. A senha PostgreSQL não é uma chave API e não é necessária no runtime da aplicação. `.env.local` não deve ser versionado.
 
