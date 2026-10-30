@@ -1,5 +1,7 @@
 # ATLAS — gestão de empréstimos
 
+Acesso publicado: https://atlas-gestao-xi.vercel.app · Código: https://github.com/atlascred/atlas-gestao
+
 Aplicação em português do Brasil com Next.js, TypeScript, Supabase Auth/PostgreSQL/Storage. Identidade visual baseada no logotipo ATLAS. Não há assinatura, trial ou cobrança SaaS.
 
 ## Funcionalidades
