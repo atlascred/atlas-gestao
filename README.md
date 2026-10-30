@@ -53,7 +53,7 @@ Em um projeto já existente, confira primeiro o histórico remoto. Não aplique 
 No painel Supabase:
 
 1. **Authentication → URL Configuration**: configure Site URL e permita as URLs da aplicação para `/login`, `/auth/callback` e `/auth/callback?next=%2Ftrocar-senha`. Inclua também localhost se usar desenvolvimento.
-2. **Authentication → Providers → Email**: desative novos cadastros públicos de Auth. O cadastro público do ATLAS registra uma solicitação, sem conceder acesso operacional.
+2. **Authentication**: desative a opção de permitir novos cadastros públicos, mantendo o provedor Email habilitado para login e convites. Na CLI, use `auth.enable_signup = false` e `auth.email.enable_signup = true`. O cadastro público do ATLAS registra uma solicitação, sem conceder acesso operacional.
 3. Configure SMTP para entrega real de convites e recuperação. O serviço de e-mail padrão do provedor tem restrições e cotas; um retorno de API não comprova recebimento na caixa de entrada.
 4. Crie e confirme a primeira conta administrativa usando procedimento seguro no Supabase. Configure `MASTER_BOOTSTRAP_SECRET`, faça login e abra `/iniciar-master`. O bootstrap transacional só permite o primeiro master. Remova esse segredo depois.
 5. O master aprova solicitações; o administrador convidado define a própria senha e acessa sua empresa. Ser master não cria automaticamente vínculo operacional com todas as empresas.
