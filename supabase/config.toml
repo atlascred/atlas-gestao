@@ -1,0 +1,25 @@
+project_id = "atlas-gestao"
+
+[api]
+enabled = true
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+major_version = 15
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://127.0.0.1:3000/**", "http://localhost:3000/**"]
+enable_signup = false
+jwt_expiry = 3600
+
+[auth.email]
+enable_signup = false
+enable_confirmations = true
+
+[storage]
+enabled = true
+file_size_limit = "10MiB"
