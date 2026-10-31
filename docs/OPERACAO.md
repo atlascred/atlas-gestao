@@ -2,7 +2,7 @@
 
 ## Acessos
 
-O master gerencia empresas globalmente. Use o seletor de empresa no menu lateral para entrar em uma empresa à qual sua conta está vinculada; “Administração” passa a mostrar a equipe e configurações dessa empresa. O seletor oferece retorno à administração global para contas master.
+O master administra solicitações, empresas e usuários pela área Administração global. O acesso operacional a uma empresa exige vínculo ativo próprio; contas sem esse vínculo não entram nos módulos da empresa. O administrador do tenant gerencia sua equipe e operação apenas dentro do próprio tenant.
 
 Funcionários têm permissões explícitas. Para operar empréstimos, conceda leitura de clientes, leitura/criação de contratos e as permissões de pagamentos pertinentes. Exportar relatórios não concede automaticamente leitura de todos os módulos. Documentos têm permissões próprias. Cobradores não recebem funções financeiras administrativas.
 
@@ -34,7 +34,7 @@ O operador define seus textos de privacidade e termos nas configurações, base 
 
 ## Homologação externa
 
-Antes de usar com clientes reais, valide telas em celular/desktop, impressão e permissões com usuários de homologação. O acesso é configurado manualmente, sem confirmação ou recuperação por e-mail. O navegador remoto não estava disponível na sessão de implementação; a compilação e os testes HTTP não comprovam aparência visual em todos os dispositivos.
+Antes de usar com clientes reais, valide telas em celular/desktop, impressão e permissões com usuários de homologação. O acesso é configurado manualmente, sem confirmação ou recuperação por e-mail. O navegador remoto pode não estar disponível em toda sessão; compilação e testes HTTP não comprovam aparência visual em todos os dispositivos.
 
 ## Cadastro completo do cliente
 
@@ -46,4 +46,6 @@ Os documentos são Foto do RG, Selfie com documento, Comprovante de residência,
 
 ## Contas e senhas sem e-mail
 
-O administrador cria as contas pelo menu Administração, informa o e-mail de login e define a senha inicial. A conta Auth é marcada como confirmada pelo servidor; não há envio de convite. Na fila global, o master define a senha inicial ao aprovar a empresa. Para trocar a senha, o master define uma nova senha no diretório global ou o próprio usuário altera a senha em “Meu perfil e senha”. A recuperação por e-mail está desativada. O responsável deve entregar senhas temporárias ao usuário por canal privado e orientar uma troca imediata. A opção de cadastros públicos permanece desativada; o e-mail continua sendo somente identificador de login.
+O administrador cria as contas pelo menu Administração, informa o e-mail de login e define a senha temporária. A conta Auth é marcada como confirmada pelo servidor; não há envio de convite. No primeiro acesso, o sistema exige a troca da senha antes de liberar qualquer outro módulo. Na fila global, o master define a senha temporária ao aprovar a empresa. Redefinições pelo master também exigem troca no próximo acesso. A recuperação por e-mail está desativada. Entregue senhas temporárias por canal privado. A opção de cadastros públicos permanece desativada; o e-mail continua sendo somente identificador de login.
+
+Solicitações de empresa recebem um código de acompanhamento mostrado uma única vez na tela; o solicitante deve copiá-lo. A consulta manual informa se o pedido está pendente, aprovado ou rejeitado. Nenhuma atualização é enviada por e-mail. Formulário público, consulta de status e login têm limites de tentativas por endereço IP.
